@@ -21,4 +21,4 @@ The implementation sequences through 3 phases: 1) initialize input registers fro
 
 Assumption:  This 18-bit fixed point format has limited dynamic range, and does not add bits of precision during accumulates, i.e., intermediate results are always truncated to 18 bits.  Therefore, we assume that the accumulated sum will not overflow 7 bits of integer (2^7 = 128) during the calculation.  Therefore, input signals should be carefully conditioned to normalize and minimize amplitudes to prevent overflows.  
 
-Implementation:  This 32-bit DFT was implemented for the Nexys-A7 board (Artix-7 100T) at 50 MHz (20 ns clock period).  It required 1092 LUTs, used 160 out of 240 DSPs, and consumed approximately 200 mW.  As 32 complex multiply/accumulates are conducted in each clock cycle, this is equivalent to 1.6 GMAC.  
+Implementation:  This 32-bit DFT was implemented for the Nexys-A7 board (Artix-7 100T) at 50 MHz (20 ns clock period).  It required 1092 LUTs, used 160 out of 240 DSPs, and consumed approximately 200 mW.  As 32 complex multiply/accumulates are conducted in each clock cycle, this is equivalent to 1.6 GMAC per second.  
