@@ -11,7 +11,7 @@ The python scripts are used to generate the input signal rinfile.txt.  As x[n] i
 
 To compute the 32-point DFT using the Python scipy library, run the sinfloatpt.py script.  This created the FFT shown in dft32scipy.png.
 
-To simulate generation of the output files routfile.txt and ioutfile.txt, create a Vivado project and add text_tb.vhd, nfdt.vhd, regn.vhd, controller.vhd, realcoeff32.vhd, and imagcoeff32.vhd.  The DFT complex coefficients have been predefined for N=32, but can be regenerated for any value of N using dftcoeffgen.py.  Note that this script formats outputs for use in VHDL in custom 18-bit fixed point (if you are using only the 32-bit DFT, this step is not necessary).  Set the top module to the text bench (text_tb), and ensure that rinfile.txt and routfile.txt are in the correct file path.  Run the simulation, and collect the output files, routfile.txt, and ioutfile.txt.  These files contain the DFT results.
+To simulate generation of the output files routfile.txt and ioutfile.txt, create a Vivado project and add text_tb.vhd, nfdt.vhd, regn.vhd, controller.vhd, realcoeff32.vhd, and imagcoeff32.vhd.  The DFT complex coefficients have been predefined for N=32, but can be regenerated for any value of N using dftcoeffgen.py.  Note that this script formats outputs for use in VHDL in custom 18-bit fixed point (if you are using only the 32-point DFT, this step is not necessary).  Set the top module to the text bench (text_tb), and ensure that rinfile.txt and iinfile.txt are in the correct file path.  Run the simulation, and collect the output files, routfile.txt, and ioutfile.txt.  These files contain the DFT results.
 
 To plot the results, run the dftresult.py script, and note the result.  One has been pregenrated in dft32fpga.png.
 
@@ -21,4 +21,4 @@ The implementation sequences through 3 phases: 1) initialize input registers fro
 
 Assumption:  This 18-bit fixed point format has limited dynamic range, and does not add bits of precision during accumulates, i.e., intermediate results are always truncated to 18 bits.  Therefore, we assume that the accumulated sum will not overflow 7 bits of integer (2^7 = 128) during the calculation.  Therefore, input signals should be carefully conditioned to normalize and minimize amplitudes to prevent overflows.  
 
-Implementation:  This 32-bit DFT was implemented for the Nexys-A7 board (Artix-7 100T) at 50 MHz (20 ns clock period).  It required 1092 LUTs, used 160 out of 240 DSPs, and consumed approximately 200 mW.  As 32 complex multiply/accumulates are conducted in each clock cycle, this is equivalent to 1.6 GMAC per second.  
+Implementation:  This 32-point DFT was implemented for the Nexys-A7 board (Artix-7 100T) at 50 MHz (20 ns clock period).  It required 1092 LUTs, used 160 out of 240 DSPs, and consumed approximately 200 mW.  As 32 complex multiply/accumulates are conducted in each clock cycle, this is equivalent to 1.6 GMAC per second.  
